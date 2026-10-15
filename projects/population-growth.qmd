@@ -1,0 +1,45 @@
+---
+title: "Live Population Growth & Simulation"
+description: "Estimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to validate the method."
+date: 2025-10-20
+categories: [R, Web Scraping, Monte Carlo Simulation]
+---
+
+## Overview
+
+This project had two linked pieces: estimating something real from live web data, and using simulation to check that I understood the statistics. Both were done in R.
+
+## The questions
+
+- How fast is the world population growing each year, judging only from a live counter on a website?
+- How much can I trust a simulation-based estimate, and does it agree with the exact math?
+
+## Part 1: Estimating growth from a live counter
+
+I wrote R functions that read the current world population from a live counter, wait a short time, and read it again. The change over the interval, scaled up to a year, gives one estimate of annual growth. A single run is noisy, so I repeated the process 10 times and took the **median**, which is not thrown off by a bad reading.
+
+The median estimate was about **71.7 million people per year**, within 2% of the U.S. Census Bureau's reported figure of 73 million. The median mattered: one of my ten runs was wildly off (about 870 million), and a mean would have been ruined by it.
+
+## Part 2: Monte Carlo simulation
+
+To practice quantifying uncertainty, I simulated a random sum of dice rolls 10,000 times and built a 99% confidence interval around the simulated average. I then worked out the exact expected value and variance by hand using the law of total variance and compared the two. For one of the cases, the simulated mean was 6.24 and the exact value was 6.25, so the simulation and the math agreed.
+
+## What I learned
+
+- Repeating a noisy measurement and using a robust summary such as the median is often better than trusting one reading.
+- A simulation is only convincing when it can be checked against something known, which is why I compared it to the exact answer.
+
+## What I would do differently
+
+Ten runs is a small number for a live counter, and I did not check how the estimate changed with the waiting time between readings. I would run more repetitions at several time intervals and report an interval for the growth estimate, not just a median.
+
+## Tools
+
+R, web scraping, Monte Carlo simulation, confidence intervals.
+
+<!-- OPTIONAL: delete these markers when you are ready.
+
+## Code
+
+[Full code on GitHub](https://github.com/bradyashaw/REPO-NAME)
+-->

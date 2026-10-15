@@ -1,0 +1,38 @@
+---
+title: "ParlGov Database Analysis"
+description: "Answered questions about elections and cabinets in 37 countries from 1900 to 2023 by writing SQL queries from R."
+date: 2025-11-10
+categories: [SQL, R, Databases]
+---
+
+## Overview
+
+ParlGov is a relational database of parliaments, elections, and cabinets. In this project I connected to it from R and answered questions using SQL, so the heavy lifting happened inside the database instead of in R.
+
+## The data
+
+The database covers 37 countries, with elections from 1900 to 2023. The information is spread across related tables, including `country`, `election`, `cabinet`, and `party`, so most questions needed a join.
+
+## What I did
+
+I connected with `DBI` and `RSQLite` and ran each query with `dbGetQuery()`. Examples of the questions I answered:
+
+- **Aggregation.** What time span do the elections cover? A `MIN` and `MAX` on the election dates returned May 27, 1900 to June 25, 2023.
+- **Joins and filtering.** Which early elections happened in Sweden, Italy, and the United Kingdom? I joined `election` to `country` on the country ID, filtered to early elections for those three countries, and sorted by country and date.
+- **Pattern matching.** Which countries had cabinets led by someone whose name starts with a given text? I used `LIKE` on the cabinet name, for example to find Finland's two Stubb cabinets in 2014.
+- **Subqueries.** Which cabinet came right after a specific leader's last one? That needed a subquery nested inside a join.
+
+## What I would do differently
+
+The subquery question taught me how easy it is to get a plausible-looking answer that is wrong. My first version compared start dates across the whole database, so it was not limited to the leader's own country. If I redid it, I would add a country filter inside the subquery and check the answer against a second source.
+
+## Tools
+
+SQL, R, `DBI`, `RSQLite`, joins, subqueries, aggregation.
+
+<!-- OPTIONAL: delete these markers when you are ready.
+
+## Code
+
+[Full code on GitHub](https://github.com/bradyashaw/REPO-NAME)
+-->

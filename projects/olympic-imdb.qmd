@@ -1,0 +1,52 @@
+---
+title: "Olympic Medal & IMDb Analysis"
+description: "Scraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb's Top 250 films from 2004 and 2025 using web archives and regular expressions."
+date: 2025-10-31
+categories: [R, Web Scraping, Regular Expressions]
+---
+
+## Overview
+
+This project had two parts, both about turning messy web pages into clean data. First I scraped and cleaned Wikipedia's all-time Olympic medal table. Then I scraped IMDb's Top 250 from two points in time and asked how the ratings changed.
+
+## The questions
+
+- Can an all-time Olympic medal table be scraped into a clean table of 162 countries?
+- Of the films that appear on IMDb's Top 250 in both 2004 and 2025, how many are rated higher now?
+
+## Part 1: Olympic medal table
+
+I scraped the table from Wikipedia with `rvest`. It had problems that a simple read-in would have missed:
+
+- **Merged ranks.** When countries tie, the page merges cells, which shifted values into the wrong columns for those rows. I repaired every affected row so each country kept its own medal counts.
+- **Names and codes.** Country names came with codes in parentheses, such as "Russian Empire (RU1)". I used regular expressions to pull out clean country names, and to extract the three codes used in the table (ROC, OAR, and RU1) into their own column.
+- **Hidden characters.** Some strings had invisible characters that broke matching until I inspected the raw characters.
+
+The final result is a clean four-column table (rank, country, code, total medals) for all 162 countries, written so it still works if Wikipedia's row order changes. The distribution is extremely skewed: a boxplot flags the 22 countries with 237 or more medals as outliers, while most countries hold only a handful of medals and the United States is far ahead at 3,095.
+
+## Part 2: IMDb Top 250 over time
+
+- **Two snapshots.** I scraped the 2004 chart from a web archive copy of the page dated June 6, 2004, and the live 2025 chart.
+- **Cleaning titles.** IMDb wrote titles like "Godfather, The (1972)". I used regular expressions to split title from year and move trailing articles to the front, while leaving names like "Monsters, Inc." alone, so titles from the two years could be matched.
+- **Matching.** I joined the two lists on cleaned title, which gave 113 films present on both.
+
+## Results
+
+Of the 113 films on both lists, 69 (61%) have a higher rating in 2025 than in 2004.
+
+One caution I would add: ratings on IMDb are not a fixed measurement. The 2004 and 2025 audiences and voting pools are different, so this shows how the scores moved, not why.
+
+## What I would do differently
+
+Matching on cleaned titles worked, but some films could have been missed because of spelling or translation differences. I would match on a film ID instead if one were available in both snapshots.
+
+## Tools
+
+R, `rvest`, `httr`, `XML`, `stringr`, regular expressions, web scraping.
+
+<!-- OPTIONAL: delete these markers when you are ready.
+
+## Code
+
+[Full code on GitHub](https://github.com/bradyashaw/REPO-NAME)
+-->

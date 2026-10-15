@@ -1,5 +1,11 @@
 ---
 title: "Projects"
+listing:
+  contents: projects
+  type: grid
+  sort: "date desc"
+  categories: true
+  fields: [image, title, description, categories]
 ---
 
-Coming soon.
+Selected data science and statistics projects. Select a project for the full write-up, including the question, my method, the results, and my role.

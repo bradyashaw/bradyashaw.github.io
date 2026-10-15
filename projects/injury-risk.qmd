@@ -1,0 +1,52 @@
+---
+title: "Athlete Injury Risk Prediction"
+description: "Compared ten classification models, five of them mine, to predict next-season injury in 800 university football players. The best model, QDA, scored 96.25% on held-out test data."
+date: 2026-04-28
+categories: [R, Machine Learning, Classification, Group Project]
+---
+
+## Overview
+
+This was a three-person final project for a machine learning course (STAT 5650). My teammates Dawson Tree and Matias Avellaneda and I each built and tuned a different set of classification models on the same data, then compared all ten models side by side.
+
+## The question
+
+Can physiological and performance measurements predict which football players will be injured next season, and which type of model does it best?
+
+## The data
+
+The data is a public Kaggle dataset of 800 Chinese university football players with 18 physiological and performance features, such as BMI, reaction time, stress level, sleep, and previous injury count. The outcome is whether the player was injured the following season, defined as missing 7 or more consecutive days. The classes are close to balanced, so plain accuracy is a fair metric here.
+
+## My role
+
+I built and evaluated five models in R: k-nearest neighbors (KNN), linear discriminant analysis (LDA), quadratic discriminant analysis (QDA), Naive Bayes, and logistic regression. My teammates built the support vector machine, decision tree, random forest, and neural network models. I wrote the exploratory analysis and preprocessing for my part and benchmarked my results against theirs in the group comparison.
+
+## Method
+
+- **Three-way split.** We split the data 80/10/10 into training, validation, and test sets. The training set was used to fit and tune, the validation set to compare models, and the test set only once at the end.
+- **Preventing leakage.** I standardized the numeric features using the mean and standard deviation from the training set only, then applied those same values to the validation and test sets. Computing them on all the data would let information from the held-out players leak into training.
+- **Tuning.** I tuned each model with 10-fold cross-validation, for example choosing k for KNN from odd values, which gave k = 15.
+- **Interpretation.** I plotted the logistic regression coefficients to see which features were linked to higher injury risk.
+
+## Results
+
+Across all ten models, QDA had the best validation accuracy at 97.5%. On the held-out test set it reached 96.25%, which is 77 of 80 players correct. Naive Bayes was second on validation at 96.25%. Most of the other models landed between 92.5% and 95%, and the single decision tree was clearly the weakest at 77.5%.
+
+The pattern surprised me: the simple, classical models did as well as or better than the SVM, random forest, and neural network. With 800 rows and well-behaved numeric features, extra flexibility did not buy accuracy.
+
+In the logistic regression, BMI, reaction time, stress level, and previous injury count had the largest positive coefficients, meaning higher values were linked to higher injury risk. I treat these as hints about what to look at rather than causes, because several features are correlated with each other, which can make individual coefficients unstable.
+
+## What I would do differently
+
+The validation and test sets are only 80 players each, so one player is 1.25 percentage points of accuracy, and the gap between QDA and the next models is within that noise. QDA also had a higher cross-validation error (6.7%) than KNN (4.2%), so ranking by cross-validation alone would have put it lower. With more time I would repeat the whole split many times, or use nested cross-validation, to get a steadier ranking. The data also covers only Chinese university football players, so I would not assume the results carry over to other sports or populations.
+
+## Tools
+
+R, `caret`, `MASS`, `e1071`, `ggplot2`, supervised classification, cross-validation, grid search, feature standardization.
+
+<!-- OPTIONAL: delete these markers once your teammates agree to share the code.
+
+## Code
+
+[Full code on GitHub](https://github.com/bradyashaw/REPO-NAME)
+-->
