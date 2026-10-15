@@ -1,25 +1,26 @@
-   ---
-   title: "Brady Shaw"
-   about:
-     template: trestles
-     image: 
-     image-width: 12em
-     links:
-       - icon: github
-         text: GitHub
-         href: https://github.com/bradyashaw
-       - icon: linkedin
-         text: LinkedIn
-         href: https://www.linkedin.com/in/bradyashaw
-       - icon: envelope
-         text: Email
-         href: mailto:Bradyashaw@outlook.com
-   ---
+---
+title: "Brady Shaw"
+about:
+  template: trestles
+  image: headshot.jpeg
+  image-width: 12em
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/bradyashaw
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/bradyashaw
+    - icon: envelope
+      text: Email
+      href: mailto:Bradyashaw@outlook.com
+---
 
-   Statistics student at Utah State University (B.S. expected December 2026, minors in Mathematics and Psychology), building toward a career in data science and analytics-driven business decisions. I plan to continue to a master's in data science.
+Statistics student at Utah State University (B.S. expected December 2026, minors in Mathematics and Psychology), building toward a career in data science and analytics-driven business decisions. I plan to continue to a master's in data science.
 
-   I work with R and SQL, and my projects cover relational database analysis, web scraping and data cleaning, Monte Carlo simulation, and regression modeling. I like turning messy data into clear answers that someone can act on.
+I work with R and SQL, and my projects cover relational database analysis, web scraping and data cleaning, Monte Carlo simulation, and regression modeling. I like turning messy data into clear answers that someone can act on.
 
-   Outside the classroom, I served two years as a full-time volunteer in Wisconsin, where I coordinated logistics and training for 150+ people, and I currently work in Home Depot's Millworks department, where I build customer quotes and translate requirements into recommendations.
+Outside the classroom, I served two years as a full-time volunteer in Wisconsin, where I coordinated logistics and training for 150+ people, and I currently work in Home Depot's Millworks department, where I build customer quotes and translate requirements into recommendations.
 
-   See my [projects](projects.qmd) or [resume](resume.qmd).
+See my [projects](projects.qmd) or [resume](resume.qmd).
+
