@@ -3,6 +3,7 @@
     "listing": "/projects.html",
     "items": [
       "/projects/injury-risk.html",
+      "/projects/parlgov.html",
       "/projects/olympic-imdb.html",
       "/projects/population-growth.html"
     ]

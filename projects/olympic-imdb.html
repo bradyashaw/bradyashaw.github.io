@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-12-01">
-<meta name="description" content="SQL analysis of Olympic medals across 162 countries, plus a web-scraped comparison of IMDb Top-250 ratings from 2004 and 2025.">
+<meta name="dcterms.date" content="2025-10-31">
+<meta name="description" content="Scraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb’s Top 250 films from 2004 and 2025 using web archives and regular expressions.">
 
 <title>Olympic Medal &amp; IMDb Analysis – Brady Shaw</title>
 <style>
@@ -132,15 +132,15 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title">
 <h1 class="title">Olympic Medal &amp; IMDb Analysis</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">SQL</div>
+    <div class="quarto-category">R</div>
     <div class="quarto-category">Web Scraping</div>
-    <div class="quarto-category">Data Visualization</div>
+    <div class="quarto-category">Regular Expressions</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    SQL analysis of Olympic medals across 162 countries, plus a web-scraped comparison of IMDb Top-250 ratings from 2004 and 2025.
+    Scraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb’s Top 250 films from 2004 and 2025 using web archives and regular expressions.
   </div>
 </div>
 
@@ -151,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 1, 2025</p>
+      <p class="date">October 31, 2025</p>
     </div>
   </div>
   
@@ -165,39 +165,46 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This project had two parts. In the first, I queried a multi-table relational database of Olympic results to compare medal totals across 162 countries. In the second, I scraped IMDb’s Top-250 movie list and compared how ratings changed between 2004 and 2025.</p>
+<p>This project had two parts, both about turning messy web pages into clean data. First I scraped and cleaned Wikipedia’s all-time Olympic medal table. Then I scraped IMDb’s Top 250 from two points in time and asked how the ratings changed.</p>
 </section>
 <section id="the-questions" class="level2">
 <h2 class="anchored" data-anchor-id="the-questions">The questions</h2>
 <ul>
-<li>How do Olympic medal totals compare across countries?</li>
-<li>Have the ratings of IMDb’s top-rated movies gone up or down over time?</li>
+<li>Can an all-time Olympic medal table be scraped into a clean table of 162 countries?</li>
+<li>Of the films that appear on IMDb’s Top 250 in both 2004 and 2025, how many are rated higher now?</li>
 </ul>
 </section>
-<section id="data-and-method" class="level2">
-<h2 class="anchored" data-anchor-id="data-and-method">Data and method</h2>
-<p><strong>Olympic data (SQL).</strong> The data was spread across several related tables, so I wrote SQL queries with joins and subqueries to bring the medal results together by country.</p>
-<p><strong>IMDb ratings (web scraping).</strong> I built an automated scraping pipeline to collect the Top-250 list for 2004 and for 2025, then compared the ratings between the two years. The raw titles came from unstructured HTML, so I used regular expressions to clean and standardize more than 250 movie titles so the lists could be compared.</p>
+<section id="part-1-olympic-medal-table" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-olympic-medal-table">Part 1: Olympic medal table</h2>
+<p>I scraped the table from Wikipedia with <code>rvest</code>. It had problems that a simple read-in would have missed:</p>
+<ul>
+<li><strong>Merged ranks.</strong> When countries tie, the page merges cells, which shifted values into the wrong columns for those rows. I repaired every affected row so each country kept its own medal counts.</li>
+<li><strong>Names and codes.</strong> Country names came with codes in parentheses, such as “Russian Empire (RU1)”. I used regular expressions to pull out clean country names, and to extract the three codes used in the table (ROC, OAR, and RU1) into their own column.</li>
+<li><strong>Hidden characters.</strong> Some strings had invisible characters that broke matching until I inspected the raw characters.</li>
+</ul>
+<p>The final result is a clean four-column table (rank, country, code, total medals) for all 162 countries, written so it still works if Wikipedia’s row order changes. The distribution is extremely skewed: a boxplot flags the 22 countries with 237 or more medals as outliers, while most countries hold only a handful of medals and the United States is far ahead at 3,095.</p>
+</section>
+<section id="part-2-imdb-top-250-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-imdb-top-250-over-time">Part 2: IMDb Top 250 over time</h2>
+<ul>
+<li><strong>Two snapshots.</strong> I scraped the 2004 chart from a web archive copy of the page dated June 6, 2004, and the live 2025 chart.</li>
+<li><strong>Cleaning titles.</strong> IMDb wrote titles like “Godfather, The (1972)”. I used regular expressions to split title from year and move trailing articles to the front, while leaving names like “Monsters, Inc.” alone, so titles from the two years could be matched.</li>
+<li><strong>Matching.</strong> I joined the two lists on cleaned title, which gave 113 films present on both.</li>
+</ul>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Between 2004 and 2025, 61% of the movies showed an improved rating.</p>
-<p>I put the findings into publication-ready visualizations and a written statistical report.</p>
-<!-- FILL IN (delete this comment when done):
-1. Say what the 61% is out of, for example "of the movies that appear on both lists". Be exact.
-2. Add one or two charts. Put the image file in the projects folder, then use:
-   ![Short description of the chart](chart-file-name.png)
-3. Add one sentence on a medal finding you found interesting, if you remember one.
--->
+<p>Of the 113 films on both lists, 69 (61%) have a higher rating in 2025 than in 2004.</p>
+<p>One caution I would add: ratings on IMDb are not a fixed measurement. The 2004 and 2025 audiences and voting pools are different, so this shows how the scores moved, not why.</p>
+</section>
+<section id="what-i-would-do-differently" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-would-do-differently">What I would do differently</h2>
+<p>Matching on cleaned titles worked, but some films could have been missed because of spelling or translation differences. I would match on a film ID instead if one were available in both snapshots.</p>
 </section>
 <section id="tools" class="level2">
 <h2 class="anchored" data-anchor-id="tools">Tools</h2>
-<p>SQL, web scraping, regular expressions, data visualization.</p>
-<!-- OPTIONAL SECTIONS. To use them, delete the comment markers (the opening and closing lines) and write 2-3 sentences each.
-
-## What I would do differently
-
-A limitation, something that did not work the first time, or what you would try next.
+<p>R, <code>rvest</code>, <code>httr</code>, <code>XML</code>, <code>stringr</code>, regular expressions, web scraping.</p>
+<!-- OPTIONAL: delete these markers when you are ready.
 
 ## Code
 

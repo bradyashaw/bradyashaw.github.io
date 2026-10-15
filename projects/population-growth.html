@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-11-01">
-<meta name="description" content="Estimating world population growth from live web data, with Monte Carlo confidence intervals that landed within 5% of official projections.">
+<meta name="dcterms.date" content="2025-10-20">
+<meta name="description" content="Estimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to validate the method.">
 
-<title>World Population Growth Estimation – Brady Shaw</title>
+<title>Live Population Growth &amp; Simulation – Brady Shaw</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -130,18 +130,17 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">World Population Growth Estimation</h1>
+<h1 class="title">Live Population Growth &amp; Simulation</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
-    <div class="quarto-category">API Integration</div>
+    <div class="quarto-category">Web Scraping</div>
     <div class="quarto-category">Monte Carlo Simulation</div>
-    <div class="quarto-category">Time Series</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Estimating world population growth from live web data, with Monte Carlo confidence intervals that landed within 5% of official projections.
+    Estimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to validate the method.
   </div>
 </div>
 
@@ -152,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 1, 2025</p>
+      <p class="date">October 20, 2025</p>
     </div>
   </div>
   
@@ -166,36 +165,39 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>I wanted to estimate how fast the world population is growing using data pulled directly from the web, rather than a file I downloaded once. The project covers collecting the data, cleaning it, estimating annual growth rates, and measuring how uncertain those estimates are.</p>
+<p>This project had two linked pieces: estimating something real from live web data, and using simulation to check that I understood the statistics. Both were done in R.</p>
 </section>
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>What is the annual growth rate of the world population, and how confident can I be in my estimate?</p>
+<section id="the-questions" class="level2">
+<h2 class="anchored" data-anchor-id="the-questions">The questions</h2>
+<ul>
+<li>How fast is the world population growing each year, judging only from a live counter on a website?</li>
+<li>How much can I trust a simulation-based estimate, and does it agree with the exact math?</li>
+</ul>
 </section>
-<section id="data-and-method" class="level2">
-<h2 class="anchored" data-anchor-id="data-and-method">Data and method</h2>
-<p><strong>Collecting the data.</strong> I wrote R functions that scrape real-time population data from web APIs. The functions include error handling, so one failed request does not break the whole run.</p>
-<p><strong>Working with XML.</strong> I automated data extraction from 64 XML files, parsed the ISO 8601 timestamps, and used the dates to run a time series analysis.</p>
-<p><strong>Measuring uncertainty.</strong> A single growth-rate estimate says nothing about how reliable it is. So I ran Monte Carlo simulations with more than 10,000 iterations. A simulation repeats the estimate many times with random variation, and the spread of the results gives a confidence interval.</p>
+<section id="part-1-estimating-growth-from-a-live-counter" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-estimating-growth-from-a-live-counter">Part 1: Estimating growth from a live counter</h2>
+<p>I wrote R functions that read the current world population from a live counter, wait a short time, and read it again. The change over the interval, scaled up to a year, gives one estimate of annual growth. A single run is noisy, so I repeated the process 10 times and took the <strong>median</strong>, which is not thrown off by a bad reading.</p>
+<p>The median estimate was about <strong>71.7 million people per year</strong>, within 2% of the U.S. Census Bureau’s reported figure of 73 million. The median mattered: one of my ten runs was wildly off (about 870 million), and a mean would have been ruined by it.</p>
 </section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>My estimates came within 5% of official population projections.</p>
-<!-- FILL IN (delete this comment when done):
-1. Add the estimated growth rate and the confidence interval you found, if you have them.
-2. Add a chart, such as the simulated distribution or the time series. Put the image file in the projects folder, then use:
-   ![Short description of the chart](chart-file-name.png)
-3. Say which official projection you compared against, for example the United Nations.
--->
+<section id="part-2-monte-carlo-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-monte-carlo-simulation">Part 2: Monte Carlo simulation</h2>
+<p>To practice quantifying uncertainty, I simulated a random sum of dice rolls 10,000 times and built a 99% confidence interval around the simulated average. I then worked out the exact expected value and variance by hand using the law of total variance and compared the two. For one of the cases, the simulated mean was 6.24 and the exact value was 6.25, so the simulation and the math agreed.</p>
+</section>
+<section id="what-i-learned" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-learned">What I learned</h2>
+<ul>
+<li>Repeating a noisy measurement and using a robust summary such as the median is often better than trusting one reading.</li>
+<li>A simulation is only convincing when it can be checked against something known, which is why I compared it to the exact answer.</li>
+</ul>
+</section>
+<section id="what-i-would-do-differently" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-would-do-differently">What I would do differently</h2>
+<p>Ten runs is a small number for a live counter, and I did not check how the estimate changed with the waiting time between readings. I would run more repetitions at several time intervals and report an interval for the growth estimate, not just a median.</p>
 </section>
 <section id="tools" class="level2">
 <h2 class="anchored" data-anchor-id="tools">Tools</h2>
-<p>R, web APIs, XML parsing, Monte Carlo simulation, time series analysis.</p>
-<!-- OPTIONAL SECTIONS. To use them, delete the comment markers (the opening and closing lines) and write 2-3 sentences each.
-
-## What I would do differently
-
-A limitation, something that did not work the first time, or what you would try next.
+<p>R, web scraping, Monte Carlo simulation, confidence intervals.</p>
+<!-- OPTIONAL: delete these markers when you are ready.
 
 ## Code
 
