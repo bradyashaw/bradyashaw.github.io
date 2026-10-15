@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
@@ -19,12 +26,5 @@
     "title": "Brady Shaw",
     "section": "",
     "text": "title: “Brady Shaw”\n\n\nabout:\n\n\ntemplate: trestles\n\n\nimage:\n\n\nimage-width: 12em\n\n\nlinks:\n\n\n- icon: github\n\n\ntext: GitHub\n\n\nhref: https://github.com/bradyashaw\n\n\n- icon: linkedin\n\n\ntext: LinkedIn\n\n\nhref: https://www.linkedin.com/in/bradyashaw\n\n\n- icon: envelope\n\n\ntext: Email\n\n\nhref: mailto:Bradyashaw@outlook.com\n\n\n\nStatistics student at Utah State University (B.S. expected December 2026, minors in Mathematics and Psychology), building toward a career in data science and analytics-driven business decisions. I plan to continue to a master’s in data science.\nI work with R and SQL, and my projects cover relational database analysis, web scraping and data cleaning, Monte Carlo simulation, and regression modeling. I like turning messy data into clear answers that someone can act on.\nOutside the classroom, I served two years as a full-time volunteer in Wisconsin, where I coordinated logistics and training for 150+ people, and I currently work in Home Depot’s Millworks department, where I build customer quotes and translate requirements into recommendations.\nSee my projects or resume."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
   }
 ]
