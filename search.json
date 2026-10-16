@@ -4,14 +4,42 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "I like statistics because it gives you a disciplined way to answer a question with evidence instead of a guess. The part I enjoy most is the investigative side: deciding which question is worth asking, figuring out what data could answer it, and communicating the results clearly."
+  },
+  {
+    "objectID": "about.html#how-i-got-here",
+    "href": "about.html#how-i-got-here",
+    "title": "About",
+    "section": "",
+    "text": "I like statistics because it gives you a disciplined way to answer a question with evidence instead of a guess. The part I enjoy most is the investigative side: deciding which question is worth asking, figuring out what data could answer it, and communicating the results clearly."
+  },
+  {
+    "objectID": "about.html#how-i-work",
+    "href": "about.html#how-i-work",
+    "title": "About",
+    "section": "How I work",
+    "text": "How I work\nI try to be careful and honest about what a result does and doesn’t show. In my projects I hold out test data, check my work against known answers, and say plainly when a sample is too small to be sure or when the data can’t answer the question. I’d rather give someone a smaller claim they can trust than a bigger one they can’t."
+  },
+  {
+    "objectID": "about.html#whats-next",
+    "href": "about.html#whats-next",
+    "title": "About",
+    "section": "What’s next",
+    "text": "What’s next\nI finish my B.S. in Statistics in December 2026 and plan to continue to a master’s in data science. I’m looking for a role where I can apply data to real business questions, learn from people with more experience, and keep growing technically."
+  },
+  {
+    "objectID": "about.html#outside-of-work",
+    "href": "about.html#outside-of-work",
+    "title": "About",
+    "section": "Outside of work",
+    "text": "Outside of work\nI train for ultramarathons, which is mostly an exercise in patience and showing up consistently. I also enjoy ceramics, playing the guitar, and reading.\nIf any of this sounds like a fit for your team, I’d be glad to hear from you. You can reach me through the links on the home page."
   },
   {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Selected data science and statistics projects. Select a project for the full write-up, including the question, my method, the results, and my role.\n\n\n\n\n\n\n\n\n\n\n\n\nAthlete Injury Risk Prediction\n\n\n\nR\n\nMachine Learning\n\nClassification\n\nGroup Project\n\n\n\nCompared ten classification models, five of them mine, to predict next-season injury in 800 university football players. The best model, QDA, scored 96.25% on held-out test…\n\n\n\n\n\n\n\n\n\n\nParlGov Database Analysis\n\n\n\nSQL\n\nR\n\nDatabases\n\n\n\nAnswered questions about elections and cabinets in 37 countries from 1900 to 2023 by writing SQL queries from R.\n\n\n\n\n\n\n\n\n\n\nOlympic Medal & IMDb Analysis\n\n\n\nR\n\nWeb Scraping\n\nRegular Expressions\n\n\n\nScraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb’s Top 250 films from 2004 and 2025 using web archives and regular expressions.\n\n\n\n\n\n\n\n\n\n\nLive Population Growth & Simulation\n\n\n\nR\n\nWeb Scraping\n\nMonte Carlo Simulation\n\n\n\nEstimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to…\n\n\n\n\n\nNo matching items"
+    "text": "Selected data science and statistics projects. Select a project for the full write-up, including the question, my method, the results, and my role.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAthlete Injury Risk Prediction\n\n\n\nR\n\nMachine Learning\n\nClassification\n\nGroup Project\n\n\n\nCompared ten classification models, five of them mine, to predict next-season injury in 800 university football players. The best model, QDA, scored 96.25% on held-out test…\n\n\n\n\n\n\n\n\n\n\n\n\nParlGov Database Analysis\n\n\n\nSQL\n\nR\n\nDatabases\n\n\n\nAnswered questions about elections and cabinets in 37 countries from 1900 to 2023 by writing SQL queries from R.\n\n\n\n\n\n\n\n\n\n\n\n\nOlympic Medal & IMDb Analysis\n\n\n\nR\n\nWeb Scraping\n\nRegular Expressions\n\n\n\nScraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb’s Top 250 films from 2004 and 2025 using web archives and regular expressions.\n\n\n\n\n\n\n\n\n\n\n\n\nLive Population Growth & Simulation\n\n\n\nR\n\nWeb Scraping\n\nMonte Carlo Simulation\n\n\n\nEstimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to…\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/population-growth.html",
