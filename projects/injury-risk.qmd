@@ -2,6 +2,7 @@
 title: "Athlete Injury Risk Prediction"
 description: "Compared ten classification models, five of them mine, to predict next-season injury in 800 university football players. The best model, QDA, scored 96.25% on held-out test data."
 date: 2026-04-28
+image: injury-risk.jpg
 categories: [R, Machine Learning, Classification, Group Project]
 ---
 

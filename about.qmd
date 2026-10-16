@@ -2,4 +2,20 @@
 title: "About"
 ---
 
-About this site
+## How I got here
+
+I like statistics because it gives you a disciplined way to answer a question with evidence instead of a guess. The part I enjoy most is the investigative side: deciding which question is worth asking, figuring out what data could answer it, and communicating the results clearly.
+
+## How I work
+
+I try to be careful and honest about what a result does and doesn't show. In my projects I hold out test data, check my work against known answers, and say plainly when a sample is too small to be sure or when the data can't answer the question. I'd rather give someone a smaller claim they can trust than a bigger one they can't.
+
+## What's next
+
+I finish my B.S. in Statistics in December 2026 and plan to continue to a master's in data science. I'm looking for a role where I can apply data to real business questions, learn from people with more experience, and keep growing technically.
+
+## Outside of work
+
+I train for ultramarathons, which is mostly an exercise in patience and showing up consistently. I also enjoy ceramics, playing the guitar, and reading.
+
+If any of this sounds like a fit for your team, I'd be glad to hear from you. You can reach me through the links on the home page.

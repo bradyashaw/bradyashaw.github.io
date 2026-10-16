@@ -2,6 +2,7 @@
 title: "ParlGov Database Analysis"
 description: "Answered questions about elections and cabinets in 37 countries from 1900 to 2023 by writing SQL queries from R."
 date: 2025-11-10
+image: parlgov.jpg
 categories: [SQL, R, Databases]
 ---
 

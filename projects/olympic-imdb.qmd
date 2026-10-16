@@ -2,6 +2,7 @@
 title: "Olympic Medal & IMDb Analysis"
 description: "Scraped and cleaned Olympic medal data for 162 countries from Wikipedia, then compared IMDb's Top 250 films from 2004 and 2025 using web archives and regular expressions."
 date: 2025-10-31
+image: olympic-imdb.jpg
 categories: [R, Web Scraping, Regular Expressions]
 ---
 

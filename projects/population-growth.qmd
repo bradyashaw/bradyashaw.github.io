@@ -2,6 +2,7 @@
 title: "Live Population Growth & Simulation"
 description: "Estimated annual world population growth by scraping a live population counter, landing within 2% of the Census figure, then used a 10,000-run Monte Carlo simulation to validate the method."
 date: 2025-10-20
+image: population-growth.jpg
 categories: [R, Web Scraping, Monte Carlo Simulation]
 ---
 
